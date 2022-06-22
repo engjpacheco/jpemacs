@@ -1,10 +1,12 @@
-#+TITLE: DT's GNU Emacs Config
+#+TITLE: JP Emacs Config
 #+AUTHOR: Javier Pacheco
-#+DESCRIPTION: JAvier Pacheco personal Emacs config.
+#+DESCRIPTION: Javier Pacheco personal Emacs config.
 #+STARTUP: showeverything
 #+EXPORT_FILE_NAME: ~/org/html/config.html
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+OPTIONS: num:nil ^:{} toc:nil
+#+property: headers-args :tangle config.el
+#+auto_tangle: t
 
 * TABLE OF CONTENTS                                                     
 - [[#important-put-this-in-your-initel][IMPORTANT! PUT THIS IN YOUR INIT.EL]]
@@ -83,8 +85,6 @@ I don't want to use init.el to config Emacs.  I want to use an org file to confi
 * FONTSIZE AND ALPHA
 #+begin_src emacs-lisp
 ;; You will most likely need to adjust this font size for your system!
-(defvar efs/default-font-size 50)
-(defvar efs/default-variable-font-size 50)
 
 ;; Make frame transparency overridable
 (defvar efs/frame-transparency '(90 . 90))
@@ -965,7 +965,7 @@ here I'll add some more extra stuff to this config.
 #+end_src
 
 ** Disable line numbers for some modes
-#+begin_src 
+#+begin_src emacs-lisp
 (dolist (mode '(org-mode-hook
                 term-mode-hook
                 shell-mode-hook
@@ -975,23 +975,23 @@ here I'll add some more extra stuff to this config.
 #+end_src
 
 ** Make ESC quit prompts
-#+begin_src 
+#+begin_src emacs-lisp
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 #+end_src
 
 ** Nerd commenter
-#+begin_src 
+#+begin_src emacs-lisp
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 #+end_src
 ** some extra options:
-#+begin_src 
+#+begin_src emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)                                 ; sustituye yes/no por y/n
 (setq select-enable-clipboard t)                              ; Sistema de fusión y portapapeles de Emacs.
 #+end_src
 
 ** smartparents auto pair braces
-#+begin_src 
+#+begin_src emacs-lisp
 (use-package smartparens
   :defer 1
   :delight
@@ -999,8 +999,8 @@ here I'll add some more extra stuff to this config.
   :config (smartparens-global-mode 1))
 #+end_src
 
-** Company
-#+begin_src 
+** Company 
+#+begin_src emacs-lisp
 (use-package company
   :ensure t
   :config
@@ -1009,4 +1009,14 @@ here I'll add some more extra stuff to this config.
    (global-company-mode t))
 
 (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+** DONE Auto tangle.
+CLOSED: [2022-06-21 Tue 22:27]
+#+begin_src emacs-lisp
+(use-package org-auto-tangle
+  :defer t
+  :hook(org-mode . org-auto-tangle-mode)
+  :config
+  (setq org-auto-tangle-default t))
 #+end_src
