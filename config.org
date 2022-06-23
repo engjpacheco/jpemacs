@@ -5,72 +5,9 @@
 #+EXPORT_FILE_NAME: ~/org/html/config.html
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+OPTIONS: num:nil ^:{} toc:nil
-#+property: headers-args :tangle config.el
+#+PROPERTY: headers-args :tangle config.el
 #+auto_tangle: t
 
-* TABLE OF CONTENTS                                                     
-- [[#important-put-this-in-your-initel][IMPORTANT! PUT THIS IN YOUR INIT.EL]]
-- [[#fontsize-and-alpha][FONTSIZE AND ALPHA]]
-- [[#about-this-config][ABOUT THIS CONFIG]]
-- [[#a-few-programs-to-load-first][A FEW PROGRAMS TO LOAD FIRST]]
-  - [[#setup-packageel-to-work-with-melpa][Setup Package.el To Work With MELPA]]
-  - [[#use-package][Use-Package]]
-  - [[#evil-mode][Evil Mode]]
-  - [[#general-keybindings][General Keybindings]]
-- [[#startup-performance][STARTUP PERFORMANCE]]
-  - [[#garbage-collection][Garbage collection]]
-  - [[#native-compil][Native Compil]]
-- [[#all-the-icons][ALL THE ICONS]]
-- [[#buffers-and-bookmarks][BUFFERS AND BOOKMARKS]]
-- [[#dashboard][DASHBOARD]]
-  - [[#configuring-dashboard][Configuring Dashboard]]
-  - [[#dashboard-in-emacsclient][Dashboard in Emacsclient]]
-- [[#delete-selection-mode][DELETE SELECTION MODE]]
-- [[#emojis][EMOJIS]]
-- [[#evaluate-elisp-expressions][EVALUATE ELISP EXPRESSIONS]]
-- [[#file-manager-dired][FILE MANAGER (DIRED)]]
-  - [[#keybindings-to-open-dired][Keybindings To Open Dired]]
-  - [[#keybindings-within-dired][Keybindings Within Dired]]
-  - [[#keybindings-for-peep-dired-mode][Keybindings For Peep-Dired-Mode]]
-- [[#files][FILES]]
-  - [[#file-related-keybindings][File-related Keybindings]]
-  - [[#installing-some-useful-file-related-modules][Installing Some Useful File-related Modules]]
-  - [[#useful-file-functions][Useful File Functions]]
-  - [[#setting-the-font-face][Setting The Font Face]]
-  - [[#zooming-in-and-out][Zooming In and Out]]
-- [[#general-keybindings-1][GENERAL KEYBINDINGS]]
-- [[#graphical-user-interface-tweaks][GRAPHICAL USER INTERFACE TWEAKS]]
-  - [[#disable-menubar-toolbars-and-scrollbars][Disable Menubar, Toolbars and Scrollbars]]
-  - [[#display-line-numbers-and-truncated-lines][Display Line Numbers and Truncated Lines]]
-  - [[#change-modeline-to-dooms-modeline][Change Modeline To Doom's Modeline]]
-- [[#ivy-counselswiper][IVY (COUNSEL/SWIPER)]]
-  - [[#installing-ivy-and-basic-setup][Installing Ivy And Basic Setup]]
-  - [[#making-m-x-great-again][Making M-x Great Again!]]
-  - [[#ivy-posframe][Ivy-posframe]]
-- [[#language-support][LANGUAGE SUPPORT]]
-- [[#magit][MAGIT]]
-- [[#neotree][NEOTREE]]
-- [[#org-mode][ORG MODE]]
-  - [[#defining-a-few-things][Defining A Few Things]]
-  - [[#enabling-org-bullets][Enabling Org Bullets]]
-  - [[#org-link-abbreviations][Org Link Abbreviations]]
-  - [[#org-todo-keywords][Org Todo Keywords]]
-  - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
-  - [[#source-code-block-syntax-highlighting][Source Code Block Syntax Highlighting]]
-  - [[#automatically-create-table-of-contents][Automatically Create Table of Contents]]
-  - [[#make-m-ret-not-add-blank-lines][Make M-RET Not Add Blank Lines]]
-  - [[#org-export-to-manpage-format][Org Export To Manpage Format]]
-- [[#projectile][PROJECTILE]]
-- [[#registers][REGISTERS]]
-- [[#scrolling][SCROLLING]]
-- [[#shells][SHELLS]]
-  - [[#eshell][Eshell]]
-- [[#splits-and-window-controls][SPLITS AND WINDOW CONTROLS]]
-- [[#theme][THEME]]
-- [[#which-key][WHICH KEY]]
-- [[#runtime-performance][RUNTIME PERFORMANCE]]
-- [[#writeroom-mode][WRITEROOM MODE]]
-- [[#personal-configs][Personal configs.]]
 
 * IMPORTANT! PUT THIS IN YOUR INIT.EL 
 I don't want to use init.el to config Emacs.  I want to use an org file to config Emacs because I like literate configs with lots of comments.  The following code block should be your init.el.  This tells init.el to use the source code blocks from this file (config.org).
@@ -90,9 +27,6 @@ I don't want to use init.el to config Emacs.  I want to use an org file to confi
 (defvar efs/frame-transparency '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 #+end_src
-
-* ABOUT THIS CONFIG 
-This is my personal Emacs config.  I patterned my config to mimic Doom Emacs, which is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box.  I am maintaining this config not just for myself, but also for those that want to explore some of what is possible with Emacs.  I will add a lot of examples of plugins and settings, some of them I may not even use personally.  I do this because many people following me on YouTube and Odysee look at my configs as "documentation".
 
 * A FEW PROGRAMS TO LOAD FIRST
 The order in which the various Emacs modules load is very important.  So the very first code block is going to contain essential modules that many other modules will depend on later in this config.
@@ -251,39 +185,41 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
 
 #+begin_src emacs-lisp
 (use-package dashboard
-  :init      ;; tweak dashboard config before loading it
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner "~/.emacs.d/1.txt")
-  (setq dashboard-center-content nil) ;; set to 't' for centered content
-  (setq dashboard-items '((recents . 5)
-                          (agenda . 5 )
-                          (bookmarks . 3)))
-  :config
-  (dashboard-setup-startup-hook)
-  (dashboard-modify-heading-icons '((recents . "file-text")
-			      (bookmarks . "book"))))
+:ensure t
+:custom
+(dashboard-banner-logo-title (format "Buen día %s" user-full-name))
+(dashboard-startup-banner "~/.emacs.d/pac.txt")
+(dashboard-items '((recents . 5)
+		    (agenda . 3)
+		    ))
+ :config
+ (setq dashboard-set-heading-icons nil
+       dashboard-set-file-icons t
+       dashboard-set-init-info t
+       dashboard-center-content t
+       dashboard-set-navigator t)
 
-  (setq dashboard-navigator-buttons
-          `((
-              (,(when (display-graphic-p)
-                  (all-the-icons-octicon "tools" :height 1.0 :v-adjust 0.0))
-              "Configuration" "Open emacs init.el config file"
-              (lambda (&rest _) (find-file (expand-file-name  "~/.emacs.d/config.org"))))
-              (,(when (display-graphic-p)
-                  (all-the-icons-octicon "calendar" :height 1.0 :v-adjust 0.0))
-              "Agenda" "Agenda personal"
-              (lambda (&rest _)
-              (interactive)
-              (if (get-buffer "*Org Agenda*")
-                  (progn
-                      (switch-to-buffer-other-window "*Org Agenda*")
-                      (kill-buffer "*Org Agenda*")
-                      (org-agenda-list))
-                  (split-window-right)
-                  (org-agenda-list))))
-              )))
+ (setq dashboard-navigator-buttons
+       `((
+	  (,(when (display-graphic-p))
+	      ;;(all-the-icons-octicon "tools" :height 1.0 :v-adjust 0.0))
+	   "Configuración" "Abrir configuración de emacs (.org)"
+	   (lambda (&rest _) (find-file (expand-file-name  "~/.emacs.d/config.org"))))
+	  (,(when (display-graphic-p))
+	      ;; (all-the-icons-octicon "calendar" :height 1.0 :v-adjust 0.0))
+	   "Agenda" "Agenda personal"
+	   (lambda (&rest _)
+	     (interactive)
+	     (if (get-buffer "*Org Agenda*")
+		 (progn
+		   (switch-to-buffer-other-window "*Org Agenda*")
+		   (kill-buffer "*Org Agenda*")
+		   (org-agenda-list))
+	       (split-window-right)
+	       (org-agenda-list))))
+	  )))
+ :hook
+ (after-init . dashboard-setup-startup-hook))
 #+end_src
 
 ** Dashboard in Emacsclient
@@ -527,8 +463,9 @@ Let's make GNU Emacs look a little better.
 
 ** Change Modeline To Doom's Modeline
 #+begin_src emacs-lisp
-(use-package doom-modeline)
-(doom-modeline-mode 1)
+(use-package doom-modeline
+:init (doom-modeline-mode 1)
+:custom ((doom-modeline-height 15)))
 #+end_src
    
 * IVY (COUNSEL/SWIPER)
@@ -659,8 +596,8 @@ A git client for Emacs.  Often cited as a killer feature for Emacs.
 * NEOTREE
 Neotree is a file tree viewer.  When you open neotree, it jumps to the current file thanks to neo-smart-open.  The neo-window-fixed-size setting makes the neotree width be adjustable.  NeoTree provides following themes: classic, ascii, arrow, icons, and nerd.  Theme can be configed by setting "two" themes for neo-theme: one for the GUI and one for the terminal.  I like to use 'SPC t' for 'toggle' keybindings, so I have used 'SPC t n' for toggle-neotree.
 
-| COMMAND        | DESCRIPTION               | KEYBINDING |
-|----------------+---------------------------+------------|
+| COMMAND        | DESCRIPTION                 | KEYBINDING |
+|----------------+-----------------------------+------------|
 | neotree-toggle | /Toggle neotree/            | SPC t n    |
 | neotree- dir   | /Open directory in neotree/ | SPC d n    |
 
@@ -693,7 +630,7 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
 (setq-default neo-show-hidden-files t)
 
 (nvmap :prefix "SPC"
-       "<f1>"   '(neotree-toggle :which-key "Toggle neotree file viewer")
+       "o o"   '(neotree-toggle :which-key "Toggle neotree file viewer")
        "d n"   '(neotree-dir :which-key "Open directory in neotree"))
 #+END_SRC
   
@@ -702,23 +639,25 @@ Org Mode is =THE= killer feature within Emacs.  But it does need some tweaking.
 
 ** Defining A Few Things
 #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook 'org-indent-mode)
-  (setq org-directory "~/org/"
-        org-agenda-files '("~/org/agenda.org")
-        org-default-notes-file (expand-file-name "notes.org" org-directory)
-        org-ellipsis " ▼ "
-        org-log-done 'time
-        org-journal-dir "~/Org/journal/"
-        org-journal-date-format "%B %d, %Y (%A) "
-        org-journal-file-format "%Y-%m-%d.org")
-        ;;org-hide-emphasis-markers t)
-  (setq org-src-preserve-indentation nil 
-        org-src-tab-acts-natively t
-        org-edit-src-content-indentation 0)
+(add-hook 'org-mode-hook 'org-indent-mode)
+(setq org-directory "~/.emacs.d/org/"
+      org-agenda-files '("~/.emacs.d/org/agenda/agenda.org"
+                        "~/.emacs.d/org/notes/home.org"
+                        "~/.emacs.d/org/notes/work.org")
+      org-default-notes-file (expand-file-name "notes.org" org-directory)
+      org-ellipsis " ▼ "
+      org-log-done 'time
+      org-journal-dir "~/.emacs.d/org/journal/"
+      org-journal-date-format "%B %d, %Y (%A) "
+      org-journal-file-format "%Y-%m-%d.org")
+      ;;org-hide-emphasis-markers t)
+(setq org-src-preserve-indentation nil 
+      org-src-tab-acts-natively t
+      org-edit-src-content-indentation 0)
 #+end_src
 
 ** Enabling Org Bullets
-Org-bullets gives us attractive bullets rather than asterisks.
+Org-bullets gives us attractive bullets rather tan asterisks.
 
 #+begin_src emacs-lisp
 (use-package org-bullets)
@@ -922,20 +861,11 @@ Which-key is a minor mode for Emacs that displays the key bindings following you
 
 #+begin_src emacs-lisp
 (use-package which-key
-  :init
-  (setq which-key-side-window-location 'bottom
-        which-key-sort-order #'which-key-key-order-alpha
-        which-key-sort-uppercase-first nil
-        which-key-add-column-padding 1
-        which-key-max-display-columns nil
-        which-key-min-display-lines 6
-        which-key-side-window-slot -10
-        which-key-side-window-max-height 0.25
-        which-key-idle-delay 0.8
-        which-key-max-description-length 25
-        which-key-allow-imprecise-window-fit t
-        which-key-separator " → " ))
-(which-key-mode)
+  :defer 0
+  :diminish which-key-mode
+  :config
+  (which-key-mode)
+  (setq which-key-idle-delay 0.5))
 #+end_src
 
 * RUNTIME PERFORMANCE
@@ -954,20 +884,30 @@ A minor mode for Emacs that implements a distraction-free writing mode similar t
 
 * Personal configs.
 here I'll add some more extra stuff to this config.
+** Some warnings
 #+begin_src emacs-lisp
-(setq persp-suppress-no-prefix-key-warning t) ;;emacs28 rare things
-;(column-number-mode)
-;; Set frame transparency
-;;(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-;;(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-;;(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;;emacs28 rare things
+(setq persp-suppress-no-prefix-key-warning t) 
+#+end_src
+
+** Hide some buffers
+
+#+begin_src emacs-lisp
+;; Forces the messages to 0, and kills the *Messages* buffer - thus disabling it on startup.
+(setq-default message-log-max nil)
+(kill-buffer "*Messages*")
+
+;; Disabled *Completions*
+(add-hook 'minibuffer-exit-hook 
+      '(lambda ()
+         (let ((buffer "*Completions*"))
+           (and (get-buffer buffer)
+            (kill-buffer buffer)))))
 #+end_src
 
 ** Disable line numbers for some modes
 #+begin_src emacs-lisp
-(dolist (mode '(org-mode-hook
-                term-mode-hook
+(dolist (mode '(term-mode-hook
                 shell-mode-hook
                 treemacs-mode-hook
                 eshell-mode-hook))
@@ -984,6 +924,7 @@ here I'll add some more extra stuff to this config.
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 #+end_src
+
 ** some extra options:
 #+begin_src emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)                                 ; sustituye yes/no por y/n
@@ -1011,12 +952,25 @@ here I'll add some more extra stuff to this config.
 (add-hook 'after-init-hook 'global-company-mode)
 #+end_src
 
-** DONE Auto tangle.
-CLOSED: [2022-06-21 Tue 22:27]
+** Auto tangle.
 #+begin_src emacs-lisp
 (use-package org-auto-tangle
   :defer t
   :hook(org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default t))
+#+end_src
+
+** Rainbow identifiers
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+** Evil surround
+#+begin_src emacs-lisp
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
 #+end_src
