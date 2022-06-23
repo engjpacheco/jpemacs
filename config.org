@@ -58,6 +58,13 @@ The order in which the various Emacs modules load is very important.  So the ver
   :config
   (auto-package-update-maybe)
   (auto-package-update-at-time "09:00"))
+
+#+end_src
+
+** This is the agenda file.
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/")
+(load "prot-org.el")
 #+end_src
 
 ** Use-Package
