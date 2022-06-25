@@ -24,8 +24,8 @@ I don't want to use init.el to config Emacs.  I want to use an org file to confi
 ;; You will most likely need to adjust this font size for your system!
 
 ;; Make frame transparency overridable
-(defvar efs/frame-transparency '(90 . 90))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+;; (defvar efs/frame-transparency '(90 . 90))
+;; (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 #+end_src
 
 * A FEW PROGRAMS TO LOAD FIRST
@@ -76,92 +76,12 @@ Org Mode is =THE= killer feature within Emacs.  But it does need some tweaking.
 #+begin_src emacs-lisp
 ;;; Agenda settings
 ;; This is the expanded view of my code (which is further below):
-(setq org-agenda-custom-commands
-      `(("A" "Daily agenda and top priority tasks"
-         ((tags-todo "*"
-                     ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
-                      (org-agenda-skip-function
-                       `(org-agenda-skip-entry-if
-                         'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
-                      (org-agenda-block-separator nil)
-                      (org-agenda-overriding-header "Important tasks without a date\n")))
-          (agenda "" ((org-agenda-span 1)
-                      (org-deadline-warning-days 0)
-                      (org-agenda-block-separator nil)
-                      (org-scheduled-past-days 0)
-                      ;; We don't need the `org-agenda-date-today'
-                      ;; highlight because that only has a practical
-                      ;; utility in multi-day views.
-                      (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
-                      (org-agenda-format-date "%A %-e %B %Y")
-                      (org-agenda-overriding-header "\nToday's agenda\n")))
-          (agenda "" ((org-agenda-start-on-weekday nil)
-                      (org-agenda-start-day "+1d")
-                      (org-agenda-span 3)
-                      (org-deadline-warning-days 0)
-                      (org-agenda-block-separator nil)
-                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                      (org-agenda-overriding-header "\nNext three days\n")))
-          (agenda "" ((org-agenda-time-grid nil)
-                      (org-agenda-start-on-weekday nil)
-                      ;; We don't want to replicate the previous section's
-                      ;; three days, so we start counting from the day after.
-                      (org-agenda-start-day "+4d")
-                      (org-agenda-span 14)
-                      (org-agenda-show-all-dates nil)
-                      (org-deadline-warning-days 0)
-                      (org-agenda-block-separator nil)
-                      (org-agenda-entry-types '(:deadline))
-                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                      (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))
-        ("P" "Plain text daily agenda and top priorities"
-         ((tags-todo "*"
-                     ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
-                      (org-agenda-skip-function
-                       `(org-agenda-skip-entry-if
-                         'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
-                      (org-agenda-block-separator nil)
-                      (org-agenda-overriding-header "Important tasks without a date\n")))
-          (agenda "" ((org-agenda-span 1)
-                      (org-deadline-warning-days 0)
-                      (org-agenda-block-separator nil)
-                      (org-scheduled-past-days 0)
-                      ;; We don't need the `org-agenda-date-today'
-                      ;; highlight because that only has a practical
-                      ;; utility in multi-day views.
-                      (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
-                      (org-agenda-format-date "%A %-e %B %Y")
-                      (org-agenda-overriding-header "\nToday's agenda\n")))
-          (agenda "" ((org-agenda-start-on-weekday nil)
-                      (org-agenda-start-day "+1d")
-                      (org-agenda-span 3)
-                      (org-deadline-warning-days 0)
-                      (org-agenda-block-separator nil)
-                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                      (org-agenda-overriding-header "\nNext three days\n")))
-          (agenda "" ((org-agenda-time-grid nil)
-                      (org-agenda-start-on-weekday nil)
-                      ;; We don't want to replicate the previous section's
-                      ;; three days, so we start counting from the day after.
-                      (org-agenda-start-day "+4d")
-                      (org-agenda-span 14)
-                      (org-agenda-show-all-dates nil)
-                      (org-deadline-warning-days 0)
-                      (org-agenda-block-separator nil)
-                      (org-agenda-entry-types '(:deadline))
-                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                      (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n"))))
-         ((org-agenda-with-colors nil)
-          (org-agenda-prefix-format "%t %s")
-          ;(org-agenda-current-time-string ,(car (last org-agenda-time-grid)))
-          (org-agenda-fontify-priorities nil)
-          (org-agenda-remove-tags t))
-         ("agenda.txt"))))
-
+(use-package org)
 (custom-set-variables
  '(org-agenda-files (list
-                     "~/.emacs.d/org/agenda.org"
-                     "~/.emacs.d/org/notes.org")))
+                     "~/.emacs.d/org/notes.org"
+                     "~/.emacs.d/org/amm.org"
+			 "~/.emacs.d/org/agenda.org")))
 
 ;;; Refile settings
 (custom-set-variables
@@ -170,8 +90,7 @@ Org Mode is =THE= killer feature within Emacs.  But it does need some tweaking.
 
 (add-hook 'org-mode-hook 'org-indent-mode)
 (setq org-directory "~/.emacs.d/org/"
-      org-agenda-files '("~/.emacs.d/org/agenda.org")
-      org-default-notes-file (expand-file-name "notes.org" org-directory)
+      ;; org-agenda-files '("~/.emacs.d/org/*.org" "~/.emacs.d/org/amm/*.org")
       org-ellipsis " ▼ "
       org-log-done 'time
       org-journal-dir "~/.emacs.d/org/journal/"
@@ -181,6 +100,14 @@ Org Mode is =THE= killer feature within Emacs.  But it does need some tweaking.
 (setq org-src-preserve-indentation nil 
       org-src-tab-acts-natively t
       org-edit-src-content-indentation 0)
+(global-set-key (kbd "C-c o") 
+                (lambda () (interactive) (find-file "~/.emacs.d/org/amm.org")))
+(global-set-key (kbd "C-c c") 'org-capture)
+
+;; Config Files for OrgMode
+(load "~/.emacs.d/org/config/org-capture.el") ;;custom org-capture
+(load "~/.emacs.d/org/config/org-agenda.el")  ;;custom org-agena
+(load "~/.emacs.d/org/config/doom-dashboard.el")
 #+end_src
 
 ** Enabling Org Bullets
@@ -189,19 +116,6 @@ Org-bullets gives us attractive bullets rather tan asterisks.
 #+begin_src emacs-lisp
 (use-package org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-#+end_src
-
-** Org Link Abbreviations
-This allows for the use of abbreviations that will get expanded out into a lengthy URL.
-   
-#+begin_src emacs-lisp
-;; An example of how this works.
-;; [[arch-wiki:Name_of_Page][Description]]
-(setq org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
-        '(("google" . "http://www.google.com/search?q=")
-          ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
-          ("ddg" . "https://duckduckgo.com/?q=")
-          ("wiki" . "https://en.wikipedia.org/wiki/")))
 #+end_src
 
 ** Org Todo Keywords 
@@ -307,8 +221,10 @@ Makes startup faster by reducing the frequency of garbage collection
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
-;; Silence compiler warnings as they can be pretty disruptive (setq comp-async-report-warnings-errors nil)
+;; Silence compiler warnings as they can be pretty disruptive
+(setq comp-async-report-warnings-errors nil)
 #+end_src
+
 ** Native Compil
 #+begin_src emacs-lisp
 ;; Silence compiler warnings as they can be pretty disruptive
@@ -377,8 +293,8 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
 :custom
 (dashboard-banner-logo-title (format "Buen día %s" user-full-name))
 (dashboard-startup-banner "~/.emacs.d/pac.txt")
-(dashboard-items '((recents . 5)
-		    (agenda . 3)
+(dashboard-items '((recents . 3)
+		    (agenda . 5)
 		    ))
  :config
  (setq dashboard-set-heading-icons nil
@@ -386,26 +302,6 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
        dashboard-set-init-info t
        dashboard-center-content t
        dashboard-set-navigator t)
-
- (setq dashboard-navigator-buttons
-       `((
-	  (,(when (display-graphic-p))
-	      ;;(all-the-icons-octicon "tools" :height 1.0 :v-adjust 0.0))
-	   "Configuración" "Abrir configuración de emacs (.org)"
-	   (lambda (&rest _) (find-file (expand-file-name  "~/.emacs.d/config.org"))))
-	  (,(when (display-graphic-p))
-	      ;; (all-the-icons-octicon "calendar" :height 1.0 :v-adjust 0.0))
-	   "Agenda" "Agenda personal"
-	   (lambda (&rest _)
-	     (interactive)
-	     (if (get-buffer "*Org Agenda*")
-		 (progn
-		   (switch-to-buffer-other-window "*Org Agenda*")
-		   (kill-buffer "*Org Agenda*")
-		   (org-agenda-list))
-	       (split-window-right)
-	       (org-agenda-list))))
-	  )))
  :hook
  (after-init . dashboard-setup-startup-hook))
 #+end_src
@@ -511,6 +407,7 @@ Dired is the file manager within Emacs.  Below, I setup keybindings for image pr
 (nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
        "."     '(find-file :which-key "Find file")
        "f f"   '(find-file :which-key "Find file")
+       "f p"   '(lambda () (interactive) (find-file "~/.emacs.d/config.org"))
        "f r"   '(counsel-recentf :which-key "Recent files")
        "f s"   '(save-buffer :which-key "Save file")
        "f u"   '(sudo-edit-find-file :which-key "Sudo find file")
