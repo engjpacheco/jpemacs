@@ -1,125 +1,13 @@
-* Tasks
-** AMM
-*** Celda 1
-**** Buhler
-***** TODO reparar fuga de aceite en piston
-***** TODO reparar articulacion
-SCHEDULED: <2022-06-24 Fri 15:00>
+* Tiempo extra
+** TODO SEM 25
+SCHEDULED: <2022-06-26 Sun>
++ sabado 25-junio-2022
+  hora de entrada 8:22am
 
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-**** Lavadora 1
-**** Lavadora 2
-**** Horno
-**** Brazo
-*** Celda 2
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-*** Celda 3
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-*** Celda 4
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-**** Robodrill 
-*** Celda 5
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-*** Celda 6
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-*** Celda 7
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-*** Celda 8
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-*** Celda 9
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-**** Robodrill 
-*** Celda 10
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-*** Celda 11
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-*** Celda 12
-**** Buhler
-**** MDO
-***** TODO Revisar AC. Falla /OL/
-SCHEDULED: <2022-06-26 Sun 20:00>
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-**** Tapping Machine
-*** Celda 13
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte [/]
-***** TODO Cambiar el color del mensaje de tag repetido a amarillo.
-***** TODO Modificar el logica de /PLC/.
-Si no hay tags en flujo que no se muestre el mensaje.  Actualmente si no hay tags en flujo se muestra el mensaje de error.
-**** Laser Marker
-**** Brochadora
-**** Robodrill 1
-**** Robodrill 2
-***** TODO Terminar sistema de ManIT [2/2]
-SCHEDULED: <2022-06-24 Fri 06:00>
-+ [X] instalar base de scanner
-+ [X] Hacer cable serial para scanner
-+ [ ] Hacer cable de red para cpu
-+ [ ] cargar programa a HMI
-*** Celda 14
-**** Buhler
-**** MDO
-**** MVE
-**** Quench
-**** Prensa de corte
-**** Laser Marker
-**** Brochadora
-**** Robodrill 
+* DONE finish the org-agenda /config/. 
+CLOSED: [2022-06-25 Sat 12:26] SCHEDULED: <2022-06-25 Sat>
+
+* TODO [#A] comprar comida, filete de pescado  
+SCHEDULED: <2022-06-25 Sat 15:00>
+  [2022-06-25 Sat 13:29]
+

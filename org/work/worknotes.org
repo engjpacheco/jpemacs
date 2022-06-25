@@ -1,0 +1,14 @@
+#+title: Actividades PM Taping machine
+#+author: Javier Pacheco
+
+* PM a taping  /machine/, (notas) [4/6]
+SCHEDULED: <2022-06-25 Sat 15:00>
+
++ [ ] Se realiza limpieza
++ [ ] se verficica funcionamiento de lubricacion (bomba)
++ [X] Se reviza condiciones de banda
++ [X] Se reaprietan tornillos superiore
++ [X] Se reaprietan botones de palma
++ [X] Verificacion de nivel e aceite
++ [ ] limpiar enfriaor de unidad hidraulica
++ [ ] reapretar conexiones electricas

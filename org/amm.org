@@ -1,0 +1,29 @@
+* Tasks
+
+Para /PM's/ aqui esta la liga para buscar material:
+[[http://erp/cgi-bit/rpgle/cgipartvw3.pgm][Partview]]
+
+** DONE [#A] PM B12.[4/4]
+CLOSED: [2022-06-25 Sat 13:32] SCHEDULED: <2022-06-26 Sun 15:00>
++ [X] Trapos /P#: 3911846/
++ [X] Filtro MPS144
+  No hay en stock
++ [X] Filtro buhler P#: 3908487 
+  No hay en stock
++ [X] key limon P#: 6550863
+
+** MDO B12
+*** TODO Revisar AC. Falla /OL/
+SCHEDULED: <2022-06-26 Sun 20:00>
+*** Prensa de corte [/]
+**** TODO Cambiar el color del mensaje de tag repetido a amarillo.
+**** TODO Modificar el logica de /PLC/.
+Si no hay tags en flujo que no se muestre el mensaje.  Actualmente si no hay tags en flujo se muestra el mensaje de error.
+
+** DONE [#A] Terminar sistema de ManIT Robodrill 2 B13 [4/4]
+CLOSED: [2022-06-24 Fri 17:30] SCHEDULED: <2022-06-24 Fri 06:00>
++ [X] instalar base de scanner
++ [X] Hacer cable serial para scanner
++ [X] Hacer cable de red para cpu
++ [X] cargar programa a HMI
+
